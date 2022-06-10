@@ -1,0 +1,70 @@
+
+
+```{r setup, include=FALSE}
+
+library(gtrendsR)
+searched_data=gtrendsR::gtrends('machine learning')
+
+```
+
+
+
+```{r cars}
+searched_country=searched_data$interest_by_country
+searched_country
+
+```
+
+```{r cars}
+na_removed=na.omit(searched_country)
+na_removed
+```
+
+```{r pressure}
+top_10=head(na_removed,10)
+top_10
+```
+
+```{r pressure}
+library(ggplot2)
+p<-ggplot(top_10, aes(x=location, y=hits, fill=location)) +
+  geom_bar(stat="identity")+theme_minimal()
+p
+
+
+
+```
+
+```{r pressure}
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(hrbrthemes)
+
+over_time=searched_data$interest_over_time
+over_time
+
+```
+
+```{r pressure}
+over_time %>% 
+  ggplot( aes(x=as.Date(date), y=hits)) +
+    geom_line(color="#69b3a2") +
+    ylim(0,110) +
+    annotate(geom="text", x=as.Date("2017-01-01"), y=2089, 
+             label="Flipcart price reached 20k $\nat the end of 2017") +
+    annotate(geom="point", x=as.Date("2017-01-17"), y=2089, size=20, shape=21, fill="transparent") +
+    geom_hline(yintercept=90, color="orange", size=.5) +
+    theme_ipsum()
+```
+
+```{r}
+ggplot(over_time, aes(x=as.Date(date), y=hits)) + 
+  geom_line() + scale_x_date(date_labels = "%b-%d-%Y")
+```
+
+```{r}
+
+typeof(as.Date(over_time$date))
+```
+
