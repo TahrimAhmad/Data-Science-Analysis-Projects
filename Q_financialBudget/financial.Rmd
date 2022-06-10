@@ -1,0 +1,27 @@
+
+```{r}
+financial=read.csv('financial.csv')
+financial
+```
+
+
+
+```{r cars}
+
+drop_na=na.omit(financial)
+drop_na=head(drop_na)
+```
+
+
+
+
+
+
+```{r}
+
+
+pie(drop_na$`Fund.allotted.in.â.¹crores.`/sum(drop_na$`Fund.allotted.in.â.¹crores.`)*100, labels = paste0(drop_na$`Fund.allotted.in.â.¹crores.`/sum(drop_na$`Fund.allotted.in.â.¹crores.`)*100, "%"))
+
+```
+
+
